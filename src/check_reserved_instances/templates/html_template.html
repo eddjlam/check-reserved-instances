@@ -56,4 +56,5 @@
     {% endif %}
     <p>({{ report[service]['qty_running_instances'] }}) running on-demand {{ service }} instances</p>
     <p>({{ report[service]['qty_reserved_instances'] }}) {{ service }} reservations</p>
+    <p>({{ report[service]['qty_unreserved_instances'] }}) Unreserved {{ service }} reservations</p>
 {% endfor %}
