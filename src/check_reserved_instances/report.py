@@ -38,6 +38,7 @@ You have no unreserved {{ service }} instances.
     {%- endif %}
 ({{ report[service]['qty_running_instances'] }}) running on-demand {{ service }} instances
 ({{ report[service]['qty_reserved_instances'] }}) {{ service }} reservations
+({{ report[service]['qty_unreserved_instances'] }}) Unreserved {{ service }} reservations
 {% endfor %}
 """  # noqa
 
