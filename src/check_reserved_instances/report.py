@@ -4,11 +4,9 @@ from __future__ import print_function
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-
 import smtplib
 
 import jinja2
-
 import pkg_resources
 
 from check_reserved_instances.aws import instance_ids, reserve_expiry
@@ -60,7 +58,7 @@ def report_results(config, results):
     if config.get('Email'):
         report_html = jinja2.Environment(
             loader=jinja2.FileSystemLoader(TEMPLATE_DIR),
-            trim_blocks=True
+            trim_blocks=True,
         ).get_template('html_template.html').render(
             report=results, instance_ids=instance_ids,
             reserve_expiry=reserve_expiry)

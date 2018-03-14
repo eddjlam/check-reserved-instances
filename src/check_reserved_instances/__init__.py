@@ -13,7 +13,7 @@ from check_reserved_instances.report import report_results
 try:
     __version__ = pkg_resources.get_distribution(
         'check_reserved_instances').version
-except:  # pragma: no cover
+except:  # pragma: no cover  # noqa: E722
     __version__ = 'unknown'
 
 # global configuration object
@@ -65,7 +65,7 @@ def cli(config):
         'elc_running_instances': {},
         'elc_reserved_instances': {},
         'rds_running_instances': {},
-        'rds_reserved_instances': {}
+        'rds_reserved_instances': {},
     }
     aws_accounts = current_config['Accounts']
 

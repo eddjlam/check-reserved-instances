@@ -50,11 +50,11 @@ def parse_aws_config(section, config_parser):
         ConfigLine('aws_role_arn', False, None),
         ConfigLine('region', False, 'us-east-1'),
         ConfigLine('rds', False, True, bool),
-        ConfigLine('elasticache', False, True, bool)
+        ConfigLine('elasticache', False, True, bool),
     ]
 
     aws_config = {
-        'name': section
+        'name': section,
     }
 
     for option in allowed_aws_options:
@@ -126,7 +126,7 @@ def parse_email_config(config_parser):
         ConfigLine('smtp_password', False, None),
         ConfigLine('smtp_recipients', True),
         ConfigLine('smtp_sendas', False, 'root@localhost'),
-        ConfigLine('smtp_tls', False, False, bool)
+        ConfigLine('smtp_tls', False, False, bool),
     ]
 
     for option in allowed_email_options:
