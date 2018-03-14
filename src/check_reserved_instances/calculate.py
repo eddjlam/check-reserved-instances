@@ -1,5 +1,7 @@
 """Results calculation functions."""
 
+from __future__ import absolute_import
+
 import datetime
 
 
@@ -73,10 +75,10 @@ def report_diffs(running_instances, reserved_instances):
 
         instance_diff[(ri, 'All')] = regional_benefit_ris[ri]
 
-    unused_reservations = dict((key, value) for key, value in
-                               instance_diff.items() if value > 0)
-    unreserved_instances = dict((key, -value) for key, value in
-                                instance_diff.items() if value < 0)
+    unused_reservations = {key: value for key, value in
+                           instance_diff.items() if value > 0}
+    unreserved_instances = {key: -value for key, value in
+                            instance_diff.items() if value < 0}
 
     qty_running_instances = 0
     for instance_count in running_instances.values():
@@ -94,5 +96,5 @@ def report_diffs(running_instances, reserved_instances):
         'unreserved_instances': unreserved_instances,
         'qty_running_instances': qty_running_instances,
         'qty_reserved_instances': qty_reserved_instances,
-        'qty_unreserved_instances': qty_unreserved_instances
+        'qty_unreserved_instances': qty_unreserved_instances,
     }

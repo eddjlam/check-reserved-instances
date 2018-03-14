@@ -1,5 +1,7 @@
 """Calculate the RI's for each AWS service."""
 
+from __future__ import absolute_import
+
 from collections import defaultdict
 import datetime
 

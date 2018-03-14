@@ -1,5 +1,6 @@
 """Parse sections from the configuration file."""
 
+from __future__ import absolute_import
 from __future__ import print_function
 
 from configparser import ConfigParser

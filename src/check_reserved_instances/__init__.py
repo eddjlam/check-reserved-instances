@@ -1,5 +1,7 @@
 """Compare instance reservations and running instances for AWS services."""
 
+from __future__ import absolute_import
+
 import click
 import pkg_resources
 

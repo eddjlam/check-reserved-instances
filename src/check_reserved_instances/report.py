@@ -1,5 +1,6 @@
 """Report and templating functionality."""
 
+from __future__ import absolute_import
 from __future__ import print_function
 
 from email.mime.multipart import MIMEMultipart
