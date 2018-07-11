@@ -6,6 +6,7 @@ from __future__ import print_function
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
+import os
 
 import jinja2
 import pkg_resources
@@ -16,6 +17,18 @@ TEMPLATE_DIR = pkg_resources.resource_filename(
     'check_reserved_instances', 'templates')
 
 text_template = """
+##########################################################
+####            Expiring Reserved Instances Report   #####
+##########################################################
+Below is list of Reserved Instances Expiring in 7 days or less:
+    {%- for instance, expirations in reserve_expiry.items() %}
+      {%- for expiration in expirations %}
+        {%- if expiration|int <= 7 %}{{ instance }} is expiring in {{ expiration }}|string days.{%- endif %}
+      {%- endfor %}
+    {%- endfor %}
+
+
+
 ##########################################################
 ####            Reserved Instances Report            #####
 ##########################################################
@@ -65,12 +78,12 @@ def report_results(config, results):
             reserve_expiry=reserve_expiry)
 
         email_config = config['Email']
-        smtp_recipients = email_config['smtp_recipients']
+        smtp_recipients = os.environ['REPORT_LIST']
         smtp_sendas = email_config['smtp_sendas']
         smtp_host = email_config['smtp_host']
         smtp_port = int(email_config['smtp_port'])
-        smtp_user = email_config['smtp_user']
-        smtp_password = email_config['smtp_password']
+        smtp_user = os.environ['GMAIL_APP_USER']
+        smtp_password = os.environ['GMAIL_APP_PW']
         smtp_tls = bool(email_config['smtp_tls'])
 
         print('\nSending emails to {}'.format(smtp_recipients))

@@ -1,3 +1,23 @@
+<h3>Reserved Instance Expiration Report</h3>
+<hr>
+    <p><strong>Below is list of Reserved Instances Expiring in 7 days or less:</strong></p>
+      <table>
+	<thead>
+	  <th>Instance</th>
+	  <th>Expiration in Days</th>
+	</thead>
+        {%- for instance, expirations in reserve_expiry.items() %}
+          {%- for expiration in expirations %}
+            {% if expiration|int <= 7 %}
+	      <tr>
+		  <td>{{ instance }}</td>
+		  <td>{{ expiration|string }}</td>
+	      </tr>
+	    {% endif %}
+	  {%- endfor %}
+	{%- endfor %}
+      </table>
+
 <h3>Reserved Instances Report</h3>
 <hr>
 {% for service in report %}

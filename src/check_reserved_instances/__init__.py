@@ -7,7 +7,7 @@ import pkg_resources
 
 from check_reserved_instances.aws import (
     calculate_ec2_ris, calculate_elc_ris, calculate_rds_ris,
-    create_boto_session)
+    create_boto_session, reserve_expiry)
 from check_reserved_instances.calculate import report_diffs
 from check_reserved_instances.config import parse_config
 from check_reserved_instances.report import report_results
@@ -93,4 +93,15 @@ def cli(config):
     report['RDS'] = report_diffs(
         results['rds_running_instances'],
         results['rds_reserved_instances'])
-    report_results(current_config, report)
+    for instance, expirations in reserve_expiry.items():
+        for expiration in expirations:
+            if int(expiration) <= 7:
+                expiring_soon = true
+    if report['EC2 VPC']['unused_reservations'] and report['EC2 Classic']['unused_reservations'] and report['ElastiCache']['unused_reservations'] and report['RDS']['unused_reservations']:
+        print ("No Unused Reservations")
+        if expiring_soon:
+            print ("Sending Report about Expiring Reservations")
+            report_results(current_config, report)
+    else:
+        print ("Sending Report about Unused Reservations")
+        report_results(current_config, report)
