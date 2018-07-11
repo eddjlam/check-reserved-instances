@@ -126,7 +126,7 @@ def parse_email_config(config_parser):
         ConfigLine('smtp_port', False, 25, int),
         ConfigLine('smtp_user', False, None),
         ConfigLine('smtp_password', False, None),
-        ConfigLine('smtp_recipients', True),
+        ConfigLine('smtp_recipients', False),
         ConfigLine('smtp_sendas', False, 'root@localhost'),
         ConfigLine('smtp_tls', False, False, bool),
     ]
