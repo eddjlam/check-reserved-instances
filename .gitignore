@@ -2,7 +2,6 @@
 venv*
 .tox
 .python-version
-config.ini
 .eggs
 *egg-info
 dist*

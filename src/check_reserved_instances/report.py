@@ -96,12 +96,13 @@ def report_results(config, results):
         mailmsg.attach(email_text)
         mailmsg.attach(email_html)
         mailmsg = mailmsg.as_string()
-        smtp = smtplib.SMTP(smtp_host, smtp_port)
-        if smtp_tls:
-            smtp.starttls()
-        if smtp_user:
-            smtp.login(smtp_user, smtp_password)
-        smtp.sendmail(smtp_sendas, smtp_recipients.split(','), mailmsg)
-        smtp.quit()
+        server = smtplib.SMTP_SSL(smtp_host)
+        server.login(smtp_user, smtp_password)
+
+        try:
+            failed = server.sendmail(smtp_sendas, smtp_recipients, mailmsg)
+            server.close()
+        except Exception, e:
+            errorMsg = "Unable to send email. Error: %s" % str(e)
     else:
         print('\nNot sending email for this report')
