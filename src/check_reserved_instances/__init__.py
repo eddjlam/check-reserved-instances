@@ -96,7 +96,7 @@ def cli(config):
     for instance, expirations in reserve_expiry.items():
         for expiration in expirations:
             if int(expiration) <= 7:
-                expiring_soon = true
+                expiring_soon = True
     if report['EC2 VPC']['unused_reservations'] and report['EC2 Classic']['unused_reservations'] and report['ElastiCache']['unused_reservations'] and report['RDS']['unused_reservations']:
         print ("No Unused Reservations")
         if expiring_soon:
